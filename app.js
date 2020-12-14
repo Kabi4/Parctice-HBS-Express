@@ -47,10 +47,20 @@ app.get('/weather', (req, res) => {
     });
 });
 
+app.get('/help/*', (req, res) => {
+    res.render('not-found', {
+        title: '404|Page Not Found',
+        name: 'Kushagra Singh Karki',
+        message:
+            '😞 Sorry Could not help with this article Please Contact Our Team',
+    });
+});
+
 app.get('*', (req, res) => {
     res.render('not-found', {
         title: '404|Page Not Found',
         name: 'Kushagra Singh Karki',
+        message: "Sorry we can't find the page you looking for 🥦 .",
     });
 });
 
