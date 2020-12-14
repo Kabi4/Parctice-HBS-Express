@@ -1,0 +1,20 @@
+h1 {
+    font-family: cursive;
+}
+div {
+    display: grid;
+    place-items: center;
+}
+
+img {
+    height: 400px;
+    width: 400px;
+    object-fit: contain;
+}
+p {
+    font-family: cursive;
+    color: lawngreen;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
