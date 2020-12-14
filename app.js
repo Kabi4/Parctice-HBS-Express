@@ -47,6 +47,13 @@ app.get('/weather', (req, res) => {
     });
 });
 
+app.get('*', (req, res) => {
+    res.render('not-found', {
+        title: '404|Page Not Found',
+        name: 'Kushagra Singh Karki',
+    });
+});
+
 //starting up server
 app.listen(3000, '127.0.0.1', () => {
     console.log('Sever listeing to requests');
