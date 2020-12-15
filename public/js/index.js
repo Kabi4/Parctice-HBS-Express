@@ -11,13 +11,13 @@ if (city) {
         //     `http://localhost:3000/weather?add=${city.value}`
         // );
         city.value.trim() !== ''
-            ? (window.location = `http://localhost:3000/weather?add=${city.value}`)
+            ? (window.location = `/weather?add=${city.value}`)
             : alert('The input Field is empty!');
     });
     city.addEventListener('keydown', (e) => {
         if (e.code === 'Enter') {
             city.value.trim() !== ''
-                ? (window.location = `http://localhost:3000/weather?add=${city.value}`)
+                ? (window.location = `/weather?add=${city.value}`)
                 : alert('The input Field is empty!');
         }
     });
