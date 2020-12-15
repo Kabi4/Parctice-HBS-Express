@@ -56,6 +56,7 @@ app.get('/weather', (req, res) => {
                     error: error.error,
                     temp: 'Not Available',
                     preci: 'Not Available',
+                    name: 'Kushagra Singh Karki',
                 });
             // data && log(data, 'success');
             data &&
@@ -71,6 +72,7 @@ app.get('/weather', (req, res) => {
                                 error: error.error,
                                 temp: 'Not Available',
                                 preci: 'Not Available',
+                                name: 'Kushagra Singh Karki',
                             });
                         // data &&
                         //     console.log(
@@ -83,6 +85,7 @@ app.get('/weather', (req, res) => {
                                 error: `Today's sky will be ${data.data[0].weather.description}.The current temprature for ${data.city} is ${data.data[0].temp} degree with rain chances of ${data.data[0].precip} precipitation.`,
                                 temp: data.data[0].temp,
                                 preci: data.data[0].precip,
+                                name: 'Kushagra Singh Karki',
                             });
                     }
                 );

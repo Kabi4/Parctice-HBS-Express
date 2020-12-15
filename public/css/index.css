@@ -55,3 +55,36 @@ nav > a{
 nav > a:hover{
     color: burlywood;
 }
+
+input {
+    width: 375px;
+    height: 30px;
+    border-radius: 8px;
+    color: rgb(82, 79, 79);
+    font-weight: 900;
+    padding: 5px 10px;
+    outline: none;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+#go {
+    font-family: inherit;
+    text-decoration: none;
+    color: darkgrey;
+    padding: 10px;
+    font-size: 22px;
+    border: 2px solid lightcyan;
+    box-shadow: 2px 4px 12px black;
+    margin: 10px;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+    user-select: none;
+}
+#go:hover{
+    transform: translateY(-3px);
+}
+#go:active{
+    transform: translateY(3px);
+    box-shadow: none;
+}
