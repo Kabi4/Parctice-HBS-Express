@@ -121,6 +121,6 @@ app.get('*', (req, res) => {
 });
 
 //starting up server
-app.listen(3000, '127.0.0.1', () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Sever listeing to requests');
 });
