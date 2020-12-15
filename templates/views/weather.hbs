@@ -4,8 +4,11 @@
     <body>
         {{>header}}
         <h1 style="color: red; text-align: center">
-            Today's Weather
+            Today's Weather for {{city}}
         </h1>
+        <h3 style="color: red;font-size:30px; text-align: center">
+            {{error}}
+        </h3>
             <p>{{temp}} Degree Celcius</p>
             <p>{{preci}} Precipitation</p>
     {{>footer}}

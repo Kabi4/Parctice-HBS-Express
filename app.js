@@ -1,18 +1,25 @@
 const path = require('path');
 const express = require('express');
+const dotenv = require('dotenv');
 const hbs = require('hbs');
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 const app = express(); //initialising express app
+const log = require('./chalking'); //Importing Colored Logs
 
 app.set('view engine', 'hbs'); //setting the view engines like PUG HBS
 app.set('views', path.join(__dirname, 'templates/views')); //setting the directory to search for the view files
 app.use(express.static(path.join(__dirname, 'public'))); //setting the static path to look for at last when no where link to be found
 hbs.registerPartials(path.join(__dirname, './templates/partials'));
 
+//Setting Path for accessing enviroment Variables
+dotenv.config({ path: './config.env' });
+
 //Setting up request managing
 
 app.get('/', (req, res) => {
     res.render('index', {
-        weather: 'Sunny',
+        // weather: 'Sunny',
         title: 'Overview',
         name: 'Kushagra Singh Karki',
     });
@@ -39,10 +46,56 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+    if (req.query.add) {
+        const city = req.query.add.replace(/"/g, '').replace(/'/g, '');
+        geocode(city, (error, data) => {
+            error &&
+                res.render('weather', {
+                    title: 'Weather',
+                    city: error.city,
+                    error: error.error,
+                    temp: 'Not Available',
+                    preci: 'Not Available',
+                });
+            // data && log(data, 'success');
+            data &&
+                forecast(
+                    data.longitude,
+                    data.latitude,
+                    data.city,
+                    (error, data) => {
+                        error &&
+                            res.render('weather', {
+                                title: 'Weather',
+                                city: error.city,
+                                error: error.error,
+                                temp: 'Not Available',
+                                preci: 'Not Available',
+                            });
+                        // data &&
+                        //     console.log(
+                        //         `Today's sky will be ${data.data[0].weather.description}.The current temprature for ${data.city} is ${data.data[0].temp} degree with rain chances of ${data.data[0].precip} precipitation.`
+                        //     );
+                        data &&
+                            res.render('weather', {
+                                title: 'Weather',
+                                city: data.city,
+                                error: `Today's sky will be ${data.data[0].weather.description}.The current temprature for ${data.city} is ${data.data[0].temp} degree with rain chances of ${data.data[0].precip} precipitation.`,
+                                temp: data.data[0].temp,
+                                preci: data.data[0].precip,
+                            });
+                    }
+                );
+        });
+
+        return;
+    }
+
     res.render('weather', {
-        temp: 12,
-        preci: '20%',
+        temp: 'N/A',
+        preci: 'N/A',
         title: 'Weather',
+        error: 'No city mentioned to fetch weather details!',
         name: 'Kushagra Singh Karki',
     });
 });
